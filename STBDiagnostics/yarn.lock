@@ -841,6 +841,11 @@
     xcode "^2.0.0"
     xmldoc "^0.4.0"
 
+"@react-native-community/netinfo@^2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-2.0.10.tgz#d28a446352e75754b78509557988359133cdbcca"
+  integrity sha512-NrIzyLe0eSbhgMnHl2QdSEhaA7yXh6p9jzMomfUa//hoTXE+xbObGDdiWWSQm2bnXnZJg8XCU3AB9qzvqcuLnA==
+
 "@types/babel__core@^7.1.0":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.1.tgz#ce9a9e5d92b7031421e1d0d74ae59f572ba48be6"
@@ -5182,6 +5187,16 @@ react-native-elements@^1.1.0:
     prop-types "^15.5.8"
     react-native-ratings "^6.3.0"
     react-native-status-bar-height "^2.2.0"
+
+react-native-network-info@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-network-info/-/react-native-network-info-4.0.1.tgz#e0242cfec0d9c0e1c6c32b8df596bb4c3223a5a3"
+  integrity sha512-ZeSkeBL/fHsFR6sAOVHMd4oMknCwsbEeL+Zewec1/3ielg8k9YcddK3wymXS7kvwV0mTB2ji4X5tI0b7XY0sDA==
+
+react-native-ping@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-ping/-/react-native-ping-1.2.2.tgz#36f150edb9fb622e84baa0c10cb29da1438c39f2"
+  integrity sha512-/6SvY6auKC4pa7QXaNGqZfNgIKi3Wxb2wE8ExICvUmM+wpiW+zXYSr14+HHVTged3lrVTrAQYB0C+aL4Uu0stQ==
 
 react-native-ratings@^6.3.0:
   version "6.3.1"

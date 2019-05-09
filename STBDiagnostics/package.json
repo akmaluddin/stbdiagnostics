@@ -7,10 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^2.0.10",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-animated-ellipsis": "^2.0.0",
     "react-native-elements": "^1.1.0",
+    "react-native-network-info": "^4.0.1",
+    "react-native-ping": "^1.2.2",
     "react-native-vector-icons": "^6.4.2"
   },
   "devDependencies": {
