@@ -5188,6 +5188,11 @@ react-native-elements@^1.1.0:
     react-native-ratings "^6.3.0"
     react-native-status-bar-height "^2.2.0"
 
+react-native-gateway-finder@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-gateway-finder/-/react-native-gateway-finder-1.0.2.tgz#9edf67bc43bfc462b8e9064a0917a35fb6860bae"
+  integrity sha1-nt9nvEO/xGK46QZKCRejX7aGC64=
+
 react-native-network-info@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-native-network-info/-/react-native-network-info-4.0.1.tgz#e0242cfec0d9c0e1c6c32b8df596bb4c3223a5a3"

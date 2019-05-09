@@ -34,6 +34,7 @@ export default class STBDiagnostic extends Component {
 			speedTest: false,
 			loadedDevice: false,
 			testResult: false,
+			pending: false,
 		}
 
 		this.loadDeviceInfo = this.loadDeviceInfo.bind(this)
@@ -102,6 +103,11 @@ export default class STBDiagnostic extends Component {
 	}
 
 	loadAllTest() {
+		this.setState({
+			...this.state,
+			testResult: false,
+			pending: true,
+		})
 		this.loadIVPTest()
 		this.loadInternetTest()
 		this.loadPDLTest()
@@ -230,10 +236,10 @@ export default class STBDiagnostic extends Component {
 				})
 			}
 
-			if(!this.state.testResult && this.state.resultInternet && this.state.resultPDL && this.state.resultPDL){
+			if(!this.state.testResult && this.state.resultInternet && this.state.resultPDL && this.state.resultPDL && this.state.resultSpeedTest){
 				this.setState({
 					...this.state,
-					testResult: true
+					testResult: true,
 				})
 			}
 		}
@@ -260,7 +266,7 @@ export default class STBDiagnostic extends Component {
 
 		const Gateway = (this.state.cellularType=='unknown') ? (
 				<Fragment>
-					<Text style={styles.bold}>Gateway : </Text><Text>{this.state.gateway}{"\n"}</Text>
+					<Text style={styles.bold}>Broadcast Gateway : </Text><Text>{this.state.gateway}{"\n"}</Text>
 				</Fragment>
 			) : (
 				<Fragment/>
@@ -274,7 +280,18 @@ export default class STBDiagnostic extends Component {
 				<Fragment/>
 			)
 
-		const testStatus = (this.state.testResult) ? (
+		const testStatus = (!this.state.loadedDevice) ? (
+				<Card
+					containerStyle={styles.pendingCard}
+				>
+					<View style={{
+						alignItems: 'center'
+					}}>
+						<Text style={styles.pendingTitle}>Pending</Text>
+						<Spinner/>
+					</View>
+				</Card>
+			):(this.state.testResult) ? (
 				<Card
 					containerStyle={styles.successCard}
 				>
@@ -501,6 +518,9 @@ export default class STBDiagnostic extends Component {
 					{SpeedTest}
 					
 				</Card>
+				<Card
+					containerStyle={styles.emptyCard}
+				/>
 			</Fragment>
 		)
 	}
@@ -521,6 +541,11 @@ const styles = StyleSheet.create({
 		borderWidth: 0,
 		backgroundColor: '#FF7061',
 	},
+	pendingCard: {
+		borderRadius: 10,
+		borderWidth: 0,
+		backgroundColor: '#F2E0C9',
+	},
 	successTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
@@ -533,10 +558,20 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		color: '#B23242',
 	},
+	pendingTitle: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 10,
+		color: '#F2CB57',
+	},
 	cardTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
+	},
+	emptyCard: {
+		opacity: 0,
+		padding: 20
 	},
 	cardContent: {
 		fontSize: 15,
