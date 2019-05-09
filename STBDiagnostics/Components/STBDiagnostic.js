@@ -4,7 +4,7 @@ import { Card, Icon, Button } from 'react-native-elements';
 import { NetworkInfo } from 'react-native-network-info';
 import Spinner from './Spinner';
 import { getDeviceInfo, getPublicIp, getDNSResolver } from '../Functions/getDeviceInfo';
-import { testIVP, testIVPResponse } from '../Functions/conductTest';
+import { pdlSpeedTest, testIVPResponse, testPublicInternet, testAstroPDL } from '../Functions/conductTest';
 
 export default class STBDiagnostic extends Component {
 	constructor(){
@@ -17,9 +17,23 @@ export default class STBDiagnostic extends Component {
 			resolver: '',
 			ivpResponseTime: null,
 			ivpTestSpeed: null,
+			publicInternetTime: null,
+			publicInternetSpeed: null,
+			pdlTime: null,
+			SpeedTestTime: null,
+			SpeedTestSpeed: null,
+
+			resultPDL: false,
+			resultInternet: false,
+			resultIVP: false,
+			resultSpeedTest: false,
+
+			pdlStatus: false,
+			publicInternetTest: false,
 			ivpTest: false,
+			speedTest: false,
 			loadedDevice: false,
-			loadedTest: false,
+			testResult: false,
 		}
 
 		this.loadDeviceInfo = this.loadDeviceInfo.bind(this)
@@ -44,6 +58,9 @@ export default class STBDiagnostic extends Component {
 					cellularType: data.effectiveType,
 				})
 			})
+			.catch(error=>{
+				console.log(error)
+			})
 
 		getPublicIp()
 			.then(data=>{
@@ -52,11 +69,21 @@ export default class STBDiagnostic extends Component {
 					publicIp: data
 				})
 			})
+			.catch(error=>{
+				console.log(error)
+			})
 
 		NetworkInfo.getIPV4Address(addr => {
 			this.setState({
 				...this.state,
 				ipv4addr: addr
+			})
+		})
+
+		NetworkInfo.getBroadcast(addr => {
+			this.setState({
+				...this.state,
+				gateway: addr
 			})
 		})
 
@@ -67,47 +94,131 @@ export default class STBDiagnostic extends Component {
 					resolver: response
 				})
 			})
+			.catch(error=>{
+				console.log(error)
+			})
+		this.loadAllTest()
+		
+	}
+
+	loadAllTest() {
+		this.loadIVPTest()
+		this.loadInternetTest()
+		this.loadPDLTest()
+		this.loadSpeedTest()
 	}
 
 	loadIVPTest(){
 		this.setState({
 			...this.state,
 			ivpResponseTime: null,
+			ivpTestSpeed: null,
+			resultIVP: false,
 			ivpTest: false,
 		})
-
-		testIVP()
-			.then(response=>{
-				this.setState({
-					...this.state,
-					loadedTest: true,
-					ivpTest: true,
-				})
-			})
-			.catch(error=>{
-				this.setState({
-					...this.state,
-					loadedTest: true,
-					ivpTest: false,
-				})
-			})
 
 		testIVPResponse()
 			.then(response=>{
 				this.setState({
 					...this.state,
-					...response
+					...response,
+					resultIVP: true,
+					ivpTest: true
 				})
 			})
 			.catch(error=>{
-				console.log(error)
+				this.setState({
+					resultIVP: false,
+					ivpTest: true
+				})
+			})
+	}
+
+	loadInternetTest(){
+		this.setState({
+			...this.state,
+			publicInternetTime: null,
+			publicInternetSpeed: null,
+			publicInternetTest: false,
+			resultInternet: false,
+		})
+
+		testPublicInternet()
+			.then(response=>{
+				this.setState({
+					...this.state,
+					...response,
+					publicInternetTest: true,
+					resultInternet: true,
+				})
+			})
+			.catch(error=>{
+				this.setState({
+					...this.state,
+					...response,
+					publicInternetTest: true,
+					resultInternet: false,
+				})
+			})
+	}
+
+	loadSpeedTest(){
+		this.setState({
+			...this.state,
+			SpeedTestTime: null,
+			resultSpeedTest: false,
+			speedTest: false,
+			SpeedTestSpeed: null,
+		})
+
+		pdlSpeedTest()
+			.then(response=>{
+				this.setState({
+					...this.state,
+					...response,
+					speedTest: true,
+					resultSpeedTest: true
+				})
+			})
+			.catch(error=>{
+				this.setState({
+					speedTest: true,
+					resultSpeedTest: false,
+				})
+			})
+	}
+
+	loadPDLTest(){
+		this.setState({
+			...this.state,
+			pdlStatus: false,
+			resultPDL: false,
+			pdlTime: null
+		})
+
+		testAstroPDL()
+			.then(response=>{
+				this.setState({
+					...this.state,
+					...response,
+					resultPDL: true,
+					pdlStatus: true
+				})
+			})
+			.catch(error=>{
+				this.setState({
+					...this.state,
+					resultPDL: false,
+					pdlStatus: true
+				})
 			})
 	}
 
 	componentDidMount(){
 		this.loadDeviceInfo()
 		this.loadIVPTest()
-		
+		this.loadInternetTest()
+		this.loadPDLTest()
 	}
 
 	componentDidUpdate(prevProps, prevState){
@@ -118,7 +229,16 @@ export default class STBDiagnostic extends Component {
 					loadedDevice: true
 				})
 			}
+
+			if(!this.state.testResult && this.state.resultInternet && this.state.resultPDL && this.state.resultPDL){
+				this.setState({
+					...this.state,
+					testResult: true
+				})
+			}
 		}
+
+
 	}
 
 	render(){
@@ -138,6 +258,14 @@ export default class STBDiagnostic extends Component {
 				</Fragment>
 			)
 
+		const Gateway = (this.state.cellularType=='unknown') ? (
+				<Fragment>
+					<Text style={styles.bold}>Gateway : </Text><Text>{this.state.gateway}{"\n"}</Text>
+				</Fragment>
+			) : (
+				<Fragment/>
+			)
+
 		const resolverIP = (this.state.resolver) ? (
 				<Fragment>
 					<Text style={styles.bold}>Resolver IP : </Text><Text>{this.state.resolver}{"\n"}</Text>
@@ -146,29 +274,133 @@ export default class STBDiagnostic extends Component {
 				<Fragment/>
 			)
 
-		const IVPTest = (this.state.ivpTest) ? (
-				<Fragment>
-					<Text style={styles.cardTitle}>IVP Server Connection</Text>
-					<Text style={styles.cardContent}>
-						<Text style={styles.bold}>IVP Connectivity : </Text><Text style={styles.positive}>Success{"\n"}</Text>
-						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.ivpResponseTime}ms{"\n"}</Text>
-						<Text style={styles.bold}>Speed : </Text><Text>{this.state.ivpTestSpeed} Mbps{"\n"}</Text>
-					</Text>
-
+		const testStatus = (this.state.testResult) ? (
+				<Card
+					containerStyle={styles.successCard}
+				>
+					<Text style={styles.successTitle}>Successful</Text>
 					<View style={{
 						alignItems: 'center'
 					}}>
-					<Button
-						onPress={()=>{this.loadIVPTest()}}
-						buttonStyle={styles.button}
-						titleStyle={{
-							fontSize:15
-						}}
-						title="Refresh"
-					/>
+						<Button
+							onPress={()=>{this.loadAllTest()}}
+							buttonStyle={styles.successbutton}
+							titleStyle={{
+								fontSize:15
+							}}
+							title="Re-Test"
+						/>
+					</View>
+				</Card>
+			) : (
+				<Card
+					containerStyle={styles.failedCard}
+				>
+					<Text style={styles.failedTitle}>Failed</Text>
+					<View style={{
+						alignItems: 'center'
+					}}>
+						<Button
+							onPress={()=>{this.loadAllTest()}}
+							buttonStyle={styles.failedbutton}
+							titleStyle={{
+								fontSize:15
+							}}
+							title="Re-Test"
+						/>
+					</View>
+				</Card>
+			)
+
+
+
+		const internetTest = (!this.state.publicInternetTest) ? (
+				<Fragment>
+					<View style={{
+						alignItems: 'center',
+						margin: 10
+					}}>
+						<Text style={styles.cardTitle}>Pinging Public Internet</Text>
+						<Spinner/>
 					</View>
 				</Fragment>
+				
+			) : (this.state.resultInternet) ? (
+				<Fragment>
+					<Text style={styles.cardTitle}>Internet Connection 1</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>Connectivity : </Text><Text style={styles.positive}>Success{"\n"}</Text>
+						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.publicInternetTime}ms{"\n"}</Text>
+						<Text style={styles.bold}>Speed : </Text><Text>{this.state.publicInternetSpeed} Mbps{"\n"}</Text>
+					</Text>
+				</Fragment>
 			) : (
+				<Fragment>
+					<Text style={styles.cardTitle}>Internet Connection 1</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>Connectivity : </Text><Text style={styles.negative}>Failed{"\n"}</Text>
+					</Text>
+				</Fragment>
+			)
+
+		const internetTest2 = (!this.state.pdlStatus) ? (
+				<Fragment>
+					<View style={{
+						alignItems: 'center',
+						margin: 10
+					}}>
+						<Text style={styles.cardTitle}>Pinging Public Internet</Text>
+						<Spinner/>
+					</View>
+				</Fragment>
+				
+			) : (this.state.resultPDL) ? (
+				<Fragment>
+					<Text style={styles.cardTitle}>Internet Connection 2</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>Connectivity : </Text><Text style={styles.positive}>Success{"\n"}</Text>
+						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.pdlTime}ms{"\n"}</Text>
+					</Text>
+				</Fragment>
+			) : (
+				<Fragment>
+					<Text style={styles.cardTitle}>Internet Connection 2</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>Connectivity : </Text><Text style={styles.negative}>Failed{"\n"}</Text>
+					</Text>
+				</Fragment>
+			)
+
+
+		const SpeedTest = (!this.state.speedTest) ? (
+				<Fragment>
+					<View style={{
+						alignItems: 'center',
+						margin: 10
+					}}>
+						<Text style={styles.cardTitle}>Speed Test</Text>
+						<Spinner/>
+					</View>
+				</Fragment>
+			) : (this.state.resultSpeedTest) ? (
+				<Fragment>
+					<Text style={styles.cardTitle}>Speed Test</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>Status : </Text><Text style={styles.positive}>Success{"\n"}</Text>
+						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.SpeedTestTime}ms{"\n"}</Text>
+						<Text style={styles.bold}>Speed : </Text><Text>{this.state.SpeedTestSpeed} Mbps{"\n"}</Text>
+					</Text>
+				</Fragment>
+			) : (
+				<Fragment>
+					<Text style={styles.cardTitle}>Speed Test</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>IVP Connectivity : </Text><Text style={styles.negative}>Failed{"\n"}</Text>
+					</Text>
+				</Fragment>
+			)
+
+		const IVPTest = (!this.state.ivpTest) ? (
 				<Fragment>
 					<View style={{
 						alignItems: 'center',
@@ -178,6 +410,22 @@ export default class STBDiagnostic extends Component {
 						<Spinner/>
 					</View>
 				</Fragment>
+			) : (this.state.resultIVP) ? (
+				<Fragment>
+					<Text style={styles.cardTitle}>IVP Server Connection</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>IVP Connectivity : </Text><Text style={styles.positive}>Success{"\n"}</Text>
+						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.ivpResponseTime}ms{"\n"}</Text>
+						<Text style={styles.bold}>Speed : </Text><Text>{this.state.ivpTestSpeed} Mbps{"\n"}</Text>
+					</Text>
+				</Fragment>
+			) : (
+				<Fragment>
+					<Text style={styles.cardTitle}>IVP Server Connection</Text>
+					<Text style={styles.cardContent}>
+						<Text style={styles.bold}>IVP Connectivity : </Text><Text style={styles.negative}>Failed{"\n"}</Text>
+					</Text>
+				</Fragment>
 			)
 
 		const showDeviceLoader = (this.state.loadedDevice) ? (
@@ -185,10 +433,12 @@ export default class STBDiagnostic extends Component {
 					<Text style={styles.cardTitle}>Device information</Text>
 					<Text style={styles.cardContent}>
 						{connectionType}
+						<Text style={styles.bold}>Local IP : </Text><Text>{this.state.ipv4addr}{"\n"}</Text>
 						<Text style={styles.bold}>Public IP : </Text><Text>{this.state.publicIp}{"\n"}</Text>
 						{cellularData}
 						{resolverIP}
-						<Text style={styles.bold}>IPV4 Address : </Text><Text>{this.state.ipv4addr}{"\n"}</Text>
+						{Gateway}
+						
 
 					</Text>
 
@@ -225,10 +475,30 @@ export default class STBDiagnostic extends Component {
 					{showDeviceLoader}
 					
 				</Card>
+				{testStatus}
+
+				<Card
+					containerStyle={styles.card}
+				>
+					{internetTest}
+					
+				</Card>
+				<Card
+					containerStyle={styles.card}
+				>
+					{internetTest2}
+					
+				</Card>
 				<Card
 					containerStyle={styles.card}
 				>
 					{IVPTest}
+					
+				</Card>
+				<Card
+					containerStyle={styles.card}
+				>
+					{SpeedTest}
 					
 				</Card>
 			</Fragment>
@@ -240,6 +510,28 @@ const styles = StyleSheet.create({
 	card: {
 		borderRadius: 10,
 		borderWidth: 0
+	},
+	successCard: {
+		borderRadius: 10,
+		borderWidth: 0,
+		backgroundColor: '#57B56B',
+	},
+	failedCard: {
+		borderRadius: 10,
+		borderWidth: 0,
+		backgroundColor: '#FF7061',
+	},
+	successTitle: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 10,
+		color: '#2A6637',
+	},
+	failedTitle: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 10,
+		color: '#B23242',
 	},
 	cardTitle: {
 		fontSize: 20,
@@ -259,6 +551,16 @@ const styles = StyleSheet.create({
 	negative: {
 		fontWeight: 'bold',
 		color: 'red',
+	},
+	successbutton: {
+		borderRadius: 20,
+		width: 150,
+		backgroundColor: '#2A6637'
+	},
+	failedbutton: {
+		borderRadius: 20,
+		width: 150,
+		backgroundColor: '#B23242',
 	},
 	button: {
 		borderRadius: 20,

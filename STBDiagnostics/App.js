@@ -37,12 +37,12 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D9D8D7',
+    backgroundColor: '#F0F0F2',
   },
   stbdiagnostic: {
     flex: 1,
   },
   advanced: {
     flex: 2,
-  }
+  },
 });
