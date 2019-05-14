@@ -3,6 +3,7 @@ import {Platform, StyleSheet, Text, View, Image, NativeModules} from 'react-nati
 import { Card, Icon, Button } from 'react-native-elements';
 import { NetworkInfo } from 'react-native-network-info';
 import Spinner from './Spinner';
+import Ellipsis from './Ellipsis';
 import { getDeviceInfo, getPublicIp, getDNSResolver } from '../Functions/getDeviceInfo';
 import { pdlSpeedTest, testIVPResponse, testPublicInternet, testAstroPDL } from '../Functions/conductTest';
 
@@ -502,7 +503,7 @@ export default class STBDiagnostic extends Component {
 						margin: 10
 					}}>
 						<Text style={styles.cardTitle}>Obtaining Device Info</Text>
-						<Spinner/>
+						<Ellipsis color='light'/>
 					</View>
 				</Fragment>
 			) 
