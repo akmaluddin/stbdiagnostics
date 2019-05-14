@@ -1,4 +1,5 @@
 import NetInfo from "@react-native-community/netinfo";
+//const dnsPacket = require('dns-packet')
 
 export async function getDeviceInfo() {
 	try{

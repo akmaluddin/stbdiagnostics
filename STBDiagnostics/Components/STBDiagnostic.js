@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, NativeModules} from 'react-native';
 import { Card, Icon, Button } from 'react-native-elements';
 import { NetworkInfo } from 'react-native-network-info';
 import Spinner from './Spinner';
@@ -27,6 +27,9 @@ export default class STBDiagnostic extends Component {
 			resultInternet: false,
 			resultIVP: false,
 			resultSpeedTest: false,
+
+			timeResolvePDL: null,
+			timeResolveCSDS: null,
 
 			pdlStatus: false,
 			publicInternetTest: false,
@@ -60,7 +63,6 @@ export default class STBDiagnostic extends Component {
 				})
 			})
 			.catch(error=>{
-				console.log(error)
 			})
 
 		getPublicIp()
@@ -71,7 +73,6 @@ export default class STBDiagnostic extends Component {
 				})
 			})
 			.catch(error=>{
-				console.log(error)
 			})
 
 		NetworkInfo.getIPV4Address(addr => {
@@ -112,6 +113,8 @@ export default class STBDiagnostic extends Component {
 		this.loadInternetTest()
 		this.loadPDLTest()
 		this.loadSpeedTest()
+		this.resolvePDL()
+		this.resolveCSDS()
 	}
 
 	loadIVPTest(){
@@ -220,11 +223,29 @@ export default class STBDiagnostic extends Component {
 			})
 	}
 
+	async resolvePDL() {
+		const val = await NativeModules.ResolveDNS.test("pdl.astro.com.my")
+		this.setState({
+			...this.state,
+			timeResolvePDL: val.toFixed(2)
+		})
+	}
+
+	async resolveCSDS() {
+		const val = await NativeModules.ResolveDNS.test("csds-astro.astro.com.my")
+		this.setState({
+			...this.state,
+			timeResolveCSDS: val.toFixed(2)
+		})
+	}
+
 	componentDidMount(){
 		this.loadDeviceInfo()
 		this.loadIVPTest()
 		this.loadInternetTest()
 		this.loadPDLTest()
+		this.resolvePDL()
+		this.resolveCSDS()
 	}
 
 	componentDidUpdate(prevProps, prevState){
@@ -406,6 +427,7 @@ export default class STBDiagnostic extends Component {
 						<Text style={styles.bold}>Status : </Text><Text style={styles.positive}>Success{"\n"}</Text>
 						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.SpeedTestTime}ms{"\n"}</Text>
 						<Text style={styles.bold}>Speed : </Text><Text>{this.state.SpeedTestSpeed} Mbps{"\n"}</Text>
+						<Text style={styles.bold}>Resolve DNS : </Text><Text>{this.state.timeResolvePDL} ms{"\n"}</Text>
 					</Text>
 				</Fragment>
 			) : (
@@ -434,6 +456,7 @@ export default class STBDiagnostic extends Component {
 						<Text style={styles.bold}>IVP Connectivity : </Text><Text style={styles.positive}>Success{"\n"}</Text>
 						<Text style={styles.bold}>Response Time : </Text><Text>{this.state.ivpResponseTime}ms{"\n"}</Text>
 						<Text style={styles.bold}>Speed : </Text><Text>{this.state.ivpTestSpeed} Mbps{"\n"}</Text>
+						<Text style={styles.bold}>Resolve DNS : </Text><Text>{this.state.timeResolveCSDS} ms{"\n"}</Text>
 					</Text>
 				</Fragment>
 			) : (

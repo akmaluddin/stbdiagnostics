@@ -12,7 +12,6 @@ export async function testIVPResponse() {
 		var size
 		await fetch('https://csds-astro.astro.com.my', types)
 			.then(response=>{
-				console.log(response)
 				size = response._bodyInit._data.size
 				measurement = new Date() - measurement
 			})
