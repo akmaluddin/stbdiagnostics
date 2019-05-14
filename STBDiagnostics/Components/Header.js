@@ -6,7 +6,7 @@ export default class AppHeader extends Component{
 	render(){
 		return(
 			<Header
-				centerComponent = {<Image source={require('../assets/AstroLogo.png')} style={{width: 75, height: 30}}/>}
+				centerComponent = {<Image source={require('../assets/AstroLogo.png')} style={{width: 63, height: 25}}/>}
 				containerStyle = {styles.header}
 			/>
 		)
@@ -15,6 +15,6 @@ export default class AppHeader extends Component{
 
 const styles = StyleSheet.create({
 	header: {
-		backgroundColor: "#8C857D"
+		backgroundColor: "#D9D0C7",
 	}
 })

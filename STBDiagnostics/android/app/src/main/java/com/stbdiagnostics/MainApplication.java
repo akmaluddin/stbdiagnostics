@@ -3,6 +3,9 @@ package com.stbdiagnostics;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNReactNativePingPackage;
+import com.pusherman.networkinfo.RNNetworkInfoPackage;
+import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -22,7 +25,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new RNReactNativePingPackage(),
+            new RNNetworkInfoPackage(),
+            new NetInfoPackage()
       );
     }
 
