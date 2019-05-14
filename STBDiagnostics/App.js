@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
 import AppHeader from './Components/Header';
 import STBDiagnostic from './Components/STBDiagnostic';
 
@@ -24,9 +24,11 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <AppHeader/>
-        <View style={styles.stbdiagnostic}>
-          <STBDiagnostic/>
-        </View>
+        <ScrollView>
+          <View style={styles.stbdiagnostic}>
+            <STBDiagnostic/>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -35,12 +37,12 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D9D8D7',
+    backgroundColor: '#F0F0F2',
   },
   stbdiagnostic: {
     flex: 1,
   },
   advanced: {
     flex: 2,
-  }
+  },
 });
