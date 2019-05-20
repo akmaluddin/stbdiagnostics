@@ -3,6 +3,9 @@ package com.stbdiagnostics;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.lottie.LottiePackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.horcrux.svg.SvgPackage;
 import com.reactlibrary.RNReactNativePingPackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
@@ -26,6 +29,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LottiePackage(),
+            new LinearGradientPackage(),
+            new SvgPackage(),
             new RNReactNativePingPackage(),
             new RNNetworkInfoPackage(),
             new NetInfoPackage()

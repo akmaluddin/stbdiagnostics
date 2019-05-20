@@ -28,7 +28,6 @@ class ResolveDNS: NSObject {
       if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),
                      &hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 {
         let numAddress = String(cString: hostname)
-        print(numAddress)
       }
     }
     let end = DispatchTime.now()

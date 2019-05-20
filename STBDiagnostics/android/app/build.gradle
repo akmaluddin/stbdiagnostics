@@ -138,6 +138,9 @@ android {
 }
 
 dependencies {
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-svg')
     implementation project(':react-native-ping')
     implementation project(':react-native-network-info')
     implementation project(':@react-native-community_netinfo')

@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
 import AppHeader from './Components/Header';
 import STBDiagnostic from './Components/STBDiagnostic';
+import { universalstyles } from './Components/UniversalStyles';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -34,15 +35,4 @@ export default class App extends Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F0F0F2',
-  },
-  stbdiagnostic: {
-    flex: 1,
-  },
-  advanced: {
-    flex: 2,
-  },
-});
+const styles = StyleSheet.create(universalstyles);
