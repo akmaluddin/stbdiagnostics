@@ -102,7 +102,7 @@ export default class AverageTest extends Component {
 					alignItems: 'center',
 					margin: 10
 				}}>
-					<Ellipsis color='light'/>
+					<Ellipsis type='light'/>
 				</View>
 
 			</Card>
