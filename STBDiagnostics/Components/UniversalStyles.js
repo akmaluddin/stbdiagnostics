@@ -1,13 +1,13 @@
 export const universalstyles = {
 	container: {
 		flex: 1,
-		backgroundColor: '#CFCFCF',
+		backgroundColor: '#EC008C',
 
 	},
 	stbdiagnostic: {
 		flex: 1,	},
 	header: {
-		backgroundColor: "#3D3B4A",
+		backgroundColor: "#FFFFFF",
 		borderBottomWidth:0,
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
@@ -49,23 +49,29 @@ export const universalstyles = {
 	    shadowOpacity: 0.2,
 	    shadowRadius: 15,
 	},
-	successTitle: {
-		fontSize: 30,
+	mbpsTitle: {
+		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		color: '#000000',
+		color: '#FFFFFF',
+	},
+	successTitle: {
+		fontSize: 40,
+		fontWeight: 'bold',
+		paddingBottom: 2,
+		color: '#FFFFFF',
 	},
 	failedTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		paddingBottom: 10,
-		color: '#B23242',
+		paddingBottom: 2,
+		color: '#FFFFFF',
 	},
 	pendingTitle: {
-		fontSize: 30,
+		fontSize: 40,
 		fontWeight: 'bold',
-		paddingBottom: 10,
-		color: '#F2CB57',
+		paddingBottom: 2,
+		color: '#FFFFFF',
 	},
 	cardTitle: {
 		fontSize: 20,
@@ -77,7 +83,6 @@ export const universalstyles = {
 		fontWeight: 'bold',
 		paddingBottom: 10,
 		color: 'white',
-		opacity: 0.9,
 	},
 	emptyCard: {
 		opacity: 0,
@@ -109,8 +114,14 @@ export const universalstyles = {
 	},
 	button: {
 		borderRadius: 25,
-		width: 180,
+		maxWidth: 200,
+		minWidth: 120,
 		height: 50,
 		margin: 5,
+		backgroundColor: '#FFFFFF',
+	},
+	buttonText: {
+		fontSize:15,
+		color: '#000000',
 	}
 }

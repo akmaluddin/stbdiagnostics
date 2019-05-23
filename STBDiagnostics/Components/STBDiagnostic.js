@@ -70,37 +70,24 @@ export default class STBDiagnostic extends Component {
 		const showAdvancedResults = (this.state.ShowAdvance) ? (
 				<Fragment>
 					<View style={{
+						flexDirection: 'row',
 						alignItems: 'center',
-						margin: 10,
-						paddingTop: 10,
+						justifyContent: 'space-evenly',
+						marginLeft: 20,
+						marginRight: 20,
+						flex: 1,
 					}}>
 						<Button
 							onPress={()=>{this.showMoreInfo()}}
 							buttonStyle={styles.button}
-							titleStyle={{
-								fontSize:15
-							}}
+							titleStyle={styles.buttonText}
 							title="Hide Info"
-							ViewComponent={require('react-native-linear-gradient').default}
-							linearGradientProps={{
-							    colors: ['#FF9800', '#F44336'],
-							    start:{x: 0, y: 0}, 
-							    end:{x: 4, y: 0}
-							}}
 						/>
 						<Button
 							onPress={()=>{this.reloadTest()}}
 							buttonStyle={styles.button}
-							titleStyle={{
-								fontSize:15
-							}}
+							titleStyle={styles.buttonText}
 							title="Reload"
-							ViewComponent={require('react-native-linear-gradient').default}
-							linearGradientProps={{
-							    colors: ['#FF9800', '#F44336'],
-							    start:{x: 0, y: 0}, 
-							    end:{x: 4, y: 0}
-							}}
 						/>
 					</View>
 					
@@ -108,37 +95,24 @@ export default class STBDiagnostic extends Component {
 				</Fragment>
 			) : (
 				<View style={{
+					flexDirection: 'row',
 					alignItems: 'center',
-					margin: 10,
-					paddingTop: 10,
+					justifyContent: 'space-evenly',
+					marginLeft: 20,
+					marginRight: 20,
+					flex: 1,
 				}}>
 					<Button
 						onPress={()=>{this.showMoreInfo()}}
 						buttonStyle={styles.button}
-						titleStyle={{
-							fontSize:15
-						}}
+						titleStyle={styles.buttonText}
 						title="More Info"
-						ViewComponent={require('react-native-linear-gradient').default}
-						linearGradientProps={{
-						    colors: ['#FF9800', '#F44336'],
-						    start:{x: 0, y: 0}, 
-						    end:{x: 4, y: 0}
-						}}
 					/>
 					<Button
 						onPress={()=>{this.reloadTest()}}
 						buttonStyle={styles.button}
-						titleStyle={{
-							fontSize:15
-						}}
+						titleStyle={styles.buttonText}
 						title="Reload"
-						ViewComponent={require('react-native-linear-gradient').default}
-						linearGradientProps={{
-						    colors: ['#FF9800', '#F44336'],
-						    start:{x: 0, y: 0}, 
-						    end:{x: 4, y: 0}
-						}}
 					/>
 				</View>
 			)

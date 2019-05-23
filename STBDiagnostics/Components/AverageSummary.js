@@ -85,8 +85,9 @@ export default class AverageSummary extends Component {
 					margin: 2,
 				}}>
 					
-					<Text style={styles.successTitle}>Average</Text>
-					<Text style={styles.successTitle}>{(this.state.average/10).toFixed(2)} Mbps</Text>
+					<Text style={styles.mbpsTitle}>Average</Text>
+					<Text style={styles.successTitle}>{(this.state.average/10).toFixed(2)}</Text>
+					<Text style={styles.mbpsTitle}>Mbps</Text>
 			
 				</View>
 			</Animated.View>
@@ -102,7 +103,8 @@ export default class AverageSummary extends Component {
 					margin: 2,
 				}}>
 					<Ellipsis color='ring'/>
-					<Text style={styles.pendingTitle}>{this.state.currentSpeed} Mbps</Text>
+					<Text style={styles.pendingTitle}>{this.state.currentSpeed}</Text>
+					<Text style={styles.mbpsTitle}>Mbps</Text>
 				</View>
 			</Animated.View>
 		) : (
@@ -117,7 +119,8 @@ export default class AverageSummary extends Component {
 						margin: 2,
 					}}>
 						<Ellipsis color='ring'/>
-						<Text style={styles.successTitle}>{this.state.currentSpeed} Mbps</Text>
+						<Text style={styles.successTitle}>{this.state.currentSpeed}</Text>
+						<Text style={styles.mbpsTitle}>Mbps</Text>
 					</View>
 			</Animated.View>
 		)

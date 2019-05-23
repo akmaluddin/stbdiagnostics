@@ -7,7 +7,7 @@ export default class AppHeader extends Component{
 	render(){
 		return(
 			<Header
-				barStyle="light-content"
+				barStyle="dark-content"
 				centerComponent = {<Image source={require('../assets/AstroLogo.png')} style={{width: 63, height: 25}}/>}
 				containerStyle = {styles.header}
 			/>

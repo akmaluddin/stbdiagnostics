@@ -9,18 +9,12 @@ export default class Ellipsis extends Component {
 			<LottieView source={require('../assets/spinner.json')} autoPlay loop style={{height: 80, width:80}}/>
 		) : (this.props.color=='traffic') ?
 		(
-			<Image
-				style={{width: 40, height: 40}}
-				source={require('../assets/Traffic.gif')}
-			/>
+			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100}}/>
 		) : (this.props.color=='ring') ?
 		(
-			<LottieView source={require('../assets/dna.json')} autoPlay loop style={{height: 100}}/>
+			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100, zIndex: -1}}/>
 		) : (
-			<Image
-				style={{width: 40, height: 40}}
-				source={require('../assets/Ellipsis.gif')}
-			/>
+			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100}}/>
 		)
 
 		return(

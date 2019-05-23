@@ -114,9 +114,9 @@ export default class AverageTest extends Component {
 				<View
 					style={{
 						alignItems: 'center',
-						bottom: -30,
 						zIndex: 2,
-						margin: -10
+						margin: 10,
+						bottom: -10,
 					}}
 				>
 					<Text
@@ -134,11 +134,11 @@ export default class AverageTest extends Component {
 					height={220}
 					yAxisLabel={''}
 					chartConfig={{
-						backgroundColor: '#e26a00',
-						backgroundGradientFrom: '#fb8c00',
-						backgroundGradientTo: '#ffa726',
+						backgroundColor: '#EC008C',
+						backgroundGradientFrom: '#FFFFFF',
+						backgroundGradientTo: '#FFFFFF',
 						decimalPlaces: 2, // optional, defaults to 2dp
-						color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+						color: (opacity = 1) => `rgba(236, 0, 140, ${opacity})`,
 						style: {
 							borderRadius: 10,
 						}
