@@ -41,7 +41,7 @@ export default class IVPTest extends Component{
 					this.fade,            
 					{
 						toValue: 1,                   
-						duration: 500,            
+						duration: 250,            
 					}
 				),
 				Animated.timing(
@@ -49,7 +49,7 @@ export default class IVPTest extends Component{
 					{
 						toValue: 0,
 						easing: Easing.linear,
-						duration: 250,
+						duration: 120,
 					}
 				),
 			]),
@@ -74,7 +74,7 @@ export default class IVPTest extends Component{
 					alignItems: 'center',
 					margin: 10
 				}}>
-					<Ellipsis color='light'/>
+					<Ellipsis type='light'/>
 				</View>
 			</Card>
 		) : (this.state.TestStatus=='success') ? (

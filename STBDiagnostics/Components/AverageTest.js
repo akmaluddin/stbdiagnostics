@@ -28,7 +28,7 @@ export default class AverageTest extends Component {
 					this.fade,            
 					{
 						toValue: 1,                   
-						duration: 500,            
+						duration: 250,            
 					}
 				),
 				Animated.timing(
@@ -36,7 +36,7 @@ export default class AverageTest extends Component {
 					{
 						toValue: 0,
 						easing: Easing.linear,
-						duration: 250,
+						duration: 120,
 					}
 				),
 			]),

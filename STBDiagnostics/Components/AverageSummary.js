@@ -56,7 +56,7 @@ export default class AverageSummary extends Component {
 			{
 				toValue: 10,
 				easing: Easing.linear,
-				duration: 250,
+				duration: 150,
 			}
 		).start()
 	}
@@ -67,7 +67,7 @@ export default class AverageSummary extends Component {
 			{
 				toValue: Dimensions.get('window').height/4,
 				easing: Easing.linear,
-				duration: 250,
+				duration: 150,
 			}
 		).start()
 	}
@@ -102,7 +102,7 @@ export default class AverageSummary extends Component {
 					alignItems: 'center',
 					margin: 2,
 				}}>
-					<Ellipsis color='ring'/>
+					<Ellipsis type='bar'/>
 					<Text style={styles.pendingTitle}>{this.state.currentSpeed}</Text>
 					<Text style={styles.mbpsTitle}>Mbps</Text>
 				</View>
@@ -118,7 +118,7 @@ export default class AverageSummary extends Component {
 						alignItems: 'center',
 						margin: 2,
 					}}>
-						<Ellipsis color='ring'/>
+						<Ellipsis type='bar'/>
 						<Text style={styles.successTitle}>{this.state.currentSpeed}</Text>
 						<Text style={styles.mbpsTitle}>Mbps</Text>
 					</View>
