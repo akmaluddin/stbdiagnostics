@@ -121,11 +121,12 @@ export default class STBDiagnostic extends Component {
 			<Fragment>
 				<AverageSummary data={this.state.datasets} currentSpeed={this.state.currentSpeed} show={this.state.ShowAdvance} retest={this.state.retestSpeed}/>
 				{showAdvancedResults}
-				<Diagnostic show={this.state.ShowAdvance}/>
+				
 				<AverageTest callback={this.setDataSets} show={this.state.ShowAdvance} retest={this.state.retestSpeed} resetCallback={this.setRetest}/>
 				<GoogleTest show={this.state.ShowAdvance}/>
 				<PDLTest show={this.state.ShowAdvance}/>
 				<IVPTest show={this.state.ShowAdvance}/>
+				<Diagnostic show={this.state.ShowAdvance}/>
 				<Card
 					containerStyle={styles.emptyCard}
 				/>
