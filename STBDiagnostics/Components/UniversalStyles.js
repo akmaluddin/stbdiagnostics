@@ -43,7 +43,7 @@ export const universalstyles = {
 	pendingCard: {
 		borderRadius: 10,
 		borderWidth: 0,
-		backgroundColor: '#F2E0C9',
+		backgroundColor: '#F2E0C900',
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
 	    shadowOpacity: 0.2,

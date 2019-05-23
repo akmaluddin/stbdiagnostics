@@ -162,6 +162,10 @@ export default class Diagnostic extends Component {
 				this.setState({
 					...this.state,
 					overAllTest: true
+				}, ()=>{
+					this.props.resetCallback({
+						retestDiagnostic: false
+					})
 				})
 			} 
 		}
@@ -170,6 +174,10 @@ export default class Diagnostic extends Component {
 		} else if (!this.props.show) {
 			this.fade = new Animated.Value(0)
 			this.position = new Animated.Value(-100)
+		}
+
+		if(this.props.retest != prevProps.retest && this.props.retest){
+			this.initTest()
 		}
 	}
 
