@@ -50,7 +50,7 @@ export const universalstyles = {
 	    shadowRadius: 15,
 	},
 	mbpsTitle: {
-		fontSize: 20,
+		fontSize: 25,
 		fontWeight: 'bold',
 		paddingBottom: 10,
 		color: '#FFFFFF',

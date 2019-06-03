@@ -83,6 +83,7 @@ export default class AverageSummary extends Component {
 				<View style={{
 					alignItems: 'center',
 					margin: 2,
+					paddingTop: 50,
 				}}>
 					
 					<Text style={styles.mbpsTitle}>Average</Text>

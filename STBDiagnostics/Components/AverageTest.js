@@ -4,6 +4,8 @@ import Ellipsis from './Ellipsis';
 import { Card, Icon, Button } from 'react-native-elements';
 import { universalstyles } from './UniversalStyles';
 import { LineChart } from 'react-native-chart-kit';
+import { AreaChart, Grid, YAxis } from 'react-native-svg-charts'
+import * as shape from 'd3-shape'
 import { pdlSpeedTest } from '../Functions/conductTest';
 
 export default class AverageTest extends Component {
@@ -48,7 +50,7 @@ export default class AverageTest extends Component {
 		for (var i = 0; i <= 9; i++) {
 			try{
 				var speed = await pdlSpeedTest()
-				temp.push(speed.SpeedTestSpeed)
+				temp.push(Number(speed.SpeedTestSpeed))
 				this.setState({
 					...this.state,
 					data: temp,
@@ -108,10 +110,12 @@ export default class AverageTest extends Component {
 			</Card>
 		) : (this.state.TestStatus=='success') ? (
 			<Fragment>
+				{console.log(this.state.data)}
 				<Card
 					containerStyle={styles.card}
 				>
 					<Text style={styles.cardTitle}>Speed Test</Text>
+					
 					<LineChart
 						data={{
 							labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -119,14 +123,15 @@ export default class AverageTest extends Component {
 							data: this.state.data
 							}]
 						}}
-						width={Dimensions.get('window').width-60} // from react-native
+						width={Dimensions.get('window').width-50} // from react-native
 						height={220}
-						yAxisLabel={''}
+						yAxisLabel={'Mbps '}
 						chartConfig={{
 							backgroundColor: '#EC008C',
 							backgroundGradientFrom: '#FFFFFF',
 							backgroundGradientTo: '#FFFFFF',
-							decimalPlaces: 2, // optional, defaults to 2dp
+							decimalPlaces: 0, // optional, defaults to 2dp
+							strokeWidth: 2,
 							color: (opacity = 1) => `rgba(236, 0, 140, ${opacity})`,
 							style: {
 								borderRadius: 10,

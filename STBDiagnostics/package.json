@@ -19,6 +19,7 @@
     "react-native-network-info": "^4.0.1",
     "react-native-ping": "^1.2.2",
     "react-native-svg": "^9.4.0",
+    "react-native-svg-charts": "^5.2.0",
     "react-native-svg-transformer": "^0.13.0",
     "react-native-vector-icons": "^6.4.2"
   },
