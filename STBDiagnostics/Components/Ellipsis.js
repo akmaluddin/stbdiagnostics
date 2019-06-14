@@ -9,7 +9,7 @@ export default class Ellipsis extends Component {
 			<LottieView source={require('../assets/spinner.json')} autoPlay loop style={{height: 80, width:80}}/>
 		) : (this.props.type=='bar') ?
 		(
-			<LottieView source={require('../assets/bar.json')} autoPlay loop style={{height: 100}}/>
+			<LottieView source={require('../assets/wave.json')} autoPlay loop style={{width: '120%'}}/>
 		) : (this.props.type=='ring') ?
 		(
 			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100, zIndex: -1}}/>

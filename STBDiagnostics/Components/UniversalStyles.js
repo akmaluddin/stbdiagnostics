@@ -1,7 +1,7 @@
 export const universalstyles = {
 	container: {
 		flex: 1,
-		backgroundColor: '#EC008C',
+		backgroundColor: '#F1F1F1',
 
 	},
 	stbdiagnostic: {
@@ -53,36 +53,37 @@ export const universalstyles = {
 		fontSize: 25,
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		color: '#FFFFFF',
+		color: '#000000',
 	},
 	successTitle: {
 		fontSize: 40,
 		fontWeight: 'bold',
 		paddingBottom: 2,
-		color: '#FFFFFF',
+		color: '#EC008C',
 	},
 	failedTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 2,
-		color: '#FFFFFF',
+		color: '#EC008C',
 	},
 	pendingTitle: {
 		fontSize: 40,
 		fontWeight: 'bold',
 		paddingBottom: 2,
-		color: '#FFFFFF',
+		color: '#EC008C',
 	},
 	cardTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
+		color: '#EC008C',
 	},
 	altCardTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		color: 'white',
+		color: '#EC008C',
 	},
 	emptyCard: {
 		opacity: 0,

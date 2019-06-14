@@ -92,22 +92,6 @@ export default class AverageSummary extends Component {
 			
 				</View>
 			</Animated.View>
-		) : (this.state.currentSpeed < 10) ? (
-			<Animated.View                 
-				style={{
-					opacity: this.fade, 
-					paddingTop: this.paddingTop       
-				}}
-			>
-				<View style={{
-					alignItems: 'center',
-					margin: 2,
-				}}>
-					<Ellipsis type='bar'/>
-					<Text style={styles.pendingTitle}>{this.state.currentSpeed}</Text>
-					<Text style={styles.mbpsTitle}>Mbps</Text>
-				</View>
-			</Animated.View>
 		) : (
 			<Animated.View                 
 				style={{
@@ -118,11 +102,20 @@ export default class AverageSummary extends Component {
 					<View style={{
 						alignItems: 'center',
 						margin: 2,
+						zIndex: 0,
 					}}>
 						<Ellipsis type='bar'/>
-						<Text style={styles.successTitle}>{this.state.currentSpeed}</Text>
-						<Text style={styles.mbpsTitle}>Mbps</Text>
 					</View>
+					<View style={{
+							alignItems: 'center',
+							marginTop: -100,
+							zIndex: 2,
+						}}
+					>
+						<Text style={styles.successTitle}>{this.state.currentSpeed}</Text>
+						<Text style={styles.mbpsTitle}>Mebps</Text>
+					</View>
+					
 			</Animated.View>
 		)
 
