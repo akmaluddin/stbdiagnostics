@@ -1,13 +1,23 @@
+const colorSpace = {
+	appBG: "#F1F1F1",
+	cardBG: "#FFFFFF",
+	altCardBG: "#FFFFFF",
+	errorCardBG: "#FF7061",
+	warningCardBG: "#F2E0C9",
+
+}
+
 export const universalstyles = {
 	container: {
 		flex: 1,
-		backgroundColor: '#F1F1F1',
+		backgroundColor: colorSpace.appBG,
 
 	},
 	stbdiagnostic: {
-		flex: 1,	},
+		flex: 1,	
+	},
 	header: {
-		backgroundColor: "#FFFFFF",
+		backgroundColor: colorSpace.cardBG,
 		borderBottomWidth:0,
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
@@ -17,15 +27,6 @@ export const universalstyles = {
 	card: {
 		borderRadius: 10,
 		borderWidth: 0,
-		shadowColor: '#000',
-	    shadowOffset: { width: 0, height: 15 },
-	    shadowOpacity: 0.2,
-	    shadowRadius: 15,
-	},
-	successCard: {
-		borderRadius: 10,
-		borderWidth: 0,
-		backgroundColor: '#86C28F',
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
 	    shadowOpacity: 0.2,
@@ -43,7 +44,7 @@ export const universalstyles = {
 	pendingCard: {
 		borderRadius: 10,
 		borderWidth: 0,
-		backgroundColor: '#F2E0C900',
+		backgroundColor: colorSpace.warningCardBG,
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
 	    shadowOpacity: 0.2,
@@ -114,15 +115,26 @@ export const universalstyles = {
 		backgroundColor: '#B23242',
 	},
 	button: {
-		borderRadius: 25,
+		borderRadius: 0,
 		maxWidth: 200,
 		minWidth: 120,
 		height: 50,
-		margin: 5,
+		marginHorizontal: 15,
 		backgroundColor: '#FFFFFF',
 	},
 	buttonText: {
 		fontSize:15,
 		color: '#000000',
+	},
+	footerCard: {
+		backgroundColor: 'powderblue',
+		height: 70,
+		borderWidth: 1,
+		borderColor: 'black'
+	},
+	footerContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		padding: 5,
 	}
 }

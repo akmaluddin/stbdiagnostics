@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
 import AppHeader from './Components/Header';
+import StartPage from './Routes/StartPage';
+import FooterNavigator from './Components/FooterNavigator';
 import STBDiagnostic from './Components/STBDiagnostic';
 import { universalstyles } from './Components/UniversalStyles';
 
@@ -21,15 +23,28 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(){
+    super()
+    this.state={
+      MoreInfo: false,
+      ReloadTest: false,
+    }
+    this.handleCallbackSetState = this.handleCallbackSetState.bind(this)
+  }
+
+  handleCallbackSetState(componentState){
+    this.setState({
+      ...this.state,
+      ...componentState,
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <AppHeader/>
-        <ScrollView>
-          <View style={styles.stbdiagnostic}>
-            <STBDiagnostic/>
-          </View>
-        </ScrollView>
+        <StartPage/>
+        <FooterNavigator callback={this.handleCallbackSetState} infoState={this.state.MoreInfo}/>
       </View>
     );
   }
