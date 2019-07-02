@@ -22,17 +22,23 @@ class ResolveDNS: NSObject {
     let start = DispatchTime.now()
     CFHostStartInfoResolution(host, .addresses, nil)
     var success: DarwinBoolean = false
+    var numAddress = String("")
     if let addresses = CFHostGetAddressing(host, &success)?.takeUnretainedValue() as NSArray?,
       let theAddress = addresses.firstObject as? NSData {
       var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
       if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),
                      &hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 {
-        let numAddress = String(cString: hostname)
+        numAddress = String(cString: hostname)
       }
     }
     let end = DispatchTime.now()
     let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
     let timeInterval = Double(nanoTime) / 1_000_000
-    resolve(timeInterval)
+    resolve([timeInterval, numAddress])
+  }
+  
+  @objc
+  func ipAddr() {
+    NSLog("%@", "test")
   }
 }

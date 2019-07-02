@@ -9,6 +9,9 @@
   "dependencies": {
     "@react-native-community/netinfo": "^2.0.10",
     "@svgr/cli": "^4.2.0",
+    "appcenter": "2.1.0",
+    "appcenter-analytics": "2.1.0",
+    "appcenter-crashes": "2.1.0",
     "dns-packet": "^5.2.1",
     "lottie-react-native": "^2.6.1",
     "react": "16.8.3",

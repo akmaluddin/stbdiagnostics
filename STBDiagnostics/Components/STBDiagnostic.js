@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {Platform, StyleSheet, Text, View, Image, NativeModules} from 'react-native';
 import { Card, Icon, Button } from 'react-native-elements';
-import Spinner from './Spinner';
 import Ellipsis from './Ellipsis';
 import { getDeviceInfo, getPublicIp, getDNSResolver } from '../Functions/getDeviceInfo';
 import { pdlSpeedTest, testIVPResponse, testPublicInternet, testAstroPDL } from '../Functions/conductTest';

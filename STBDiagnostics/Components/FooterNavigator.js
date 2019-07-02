@@ -6,29 +6,37 @@ import {universalstyles} from '../Components/UniversalStyles';
 export default class FooterNavigator extends Component {
 	constructor(){
 		super()
-		this.state={
-			MoreInfo: false
-		}
-	}
-
-	componentDidUpdate(prevProps, prevState){
-		if(this.props.infoState != this.state.MoreInfo){
-			this.setState({
-				...this.state,
-				MoreInfo: this.props.infoState,
-			})
-		}
 	}
 
 	toggleView(){
 		this.props.callback({
-			MoreInfo: !this.state.MoreInfo
+			MoreInfo: !this.props.state.MoreInfo
 		})
 	}
 
+	reload(){
+		this.props.callback({
+			MoreInfo: false,
+			ReloadTest: true,
+			googleIp: null,
+			csdsIp: null,
+			googlePing: null,
+			csdsPing: null,
+			pdlIp: null,
+			pdlPing: null,
+			deviceConnectionType: null,
+			publicIp: null,
+			ipv4addr: null,
+			gateway: null,
+			speedRuns: [],
+			currentSpeed: 0,
+			averageSpeed: 0,
+		})
+	}	
+
 
 	render(){
-		const InfoButton = (this.state.MoreInfo) ? (
+		const InfoButton = (this.props.state.MoreInfo) ? (
 			"Hide Info"
 		) : (
 			"More Info"
@@ -48,7 +56,7 @@ export default class FooterNavigator extends Component {
 							buttonStyle={styles.button}
 							titleStyle={styles.buttonText}
 							title="Reload"
-							onPress={()=>{this.toggleView()}}
+							onPress={()=>{this.reload()}}
 						/>
 					</View>
 				</View>

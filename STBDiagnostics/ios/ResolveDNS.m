@@ -16,5 +16,6 @@ RCT_EXTERN_METHOD(test: (NSString)address
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
+RCT_EXTERN_METHOD(ipAddr)
 
 @end

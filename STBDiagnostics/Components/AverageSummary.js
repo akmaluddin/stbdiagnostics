@@ -113,7 +113,7 @@ export default class AverageSummary extends Component {
 						}}
 					>
 						<Text style={styles.successTitle}>{this.state.currentSpeed}</Text>
-						<Text style={styles.mbpsTitle}>Mebps</Text>
+						<Text style={styles.mbpsTitle}>Mbps</Text>
 					</View>
 					
 			</Animated.View>

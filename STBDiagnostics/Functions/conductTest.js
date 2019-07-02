@@ -1,9 +1,27 @@
+import {NativeModules} from 'react-native';
+
 const types={
 	cache: 'no-store'
 }
 
 function calculateBandwidth(time, size) {
 	return (size/1000000*8/(time/1000))
+}
+
+export function debounce(ms) {
+	return function(x) {
+		return new Promise(resolve => setTimeout(() => resolve(x), ms));
+	};
+}
+
+export async function pingdns(domainname){
+	await NativeModules.ResolveDNS.test(domainname)
+		.then(response=>{
+			return(response)
+		})
+		.catch(error=>{
+			return Promise.reject(error)
+		})
 }
 
 export async function testIVPResponse() {
@@ -30,7 +48,7 @@ export async function testPublicInternet() {
 		var measurement = new Date()
 		var size
 		await fetch('https://www.google.com', types)
-			.then(response=>{
+			.then(debounce(5000)).then(response=>{
 				size = response._bodyInit._data.size
 				measurement = new Date() - measurement
 			})
@@ -70,9 +88,9 @@ export async function pdlSpeedTest() {
 		var measurement = new Date()
 		var size
 		await fetch('http://pdl.astro.com.my/astro/PREVIEW/astro-PREV1407070011111111-201611110114120000.nff?cardid=1', types)
-			.then(response=>{
+			.then(debounce(1000)).then(response=>{
 				size = response._bodyInit._data.size
-				measurement = new Date() - measurement
+				measurement = new Date() - measurement - 1000
 			})
 		var speed = calculateBandwidth(measurement, size)
 		return ({

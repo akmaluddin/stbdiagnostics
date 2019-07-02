@@ -3,7 +3,7 @@ const colorSpace = {
 	cardBG: "#FFFFFF",
 	altCardBG: "#FFFFFF",
 	errorCardBG: "#FF7061",
-	warningCardBG: "#F2E0C9",
+	warningCardBG: "#F2BB13",
 
 }
 
@@ -35,7 +35,7 @@ export const universalstyles = {
 	failedCard: {
 		borderRadius: 10,
 		borderWidth: 0,
-		backgroundColor: '#FF7061',
+		backgroundColor: colorSpace.errorCardBG,
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
 	    shadowOpacity: 0.2,
@@ -45,6 +45,7 @@ export const universalstyles = {
 		borderRadius: 10,
 		borderWidth: 0,
 		backgroundColor: colorSpace.warningCardBG,
+		opacity: 0.6,
 		shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 15 },
 	    shadowOpacity: 0.2,
@@ -66,7 +67,7 @@ export const universalstyles = {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 2,
-		color: '#EC008C',
+		color: '#000000',
 	},
 	pendingTitle: {
 		fontSize: 40,
@@ -127,10 +128,8 @@ export const universalstyles = {
 		color: '#000000',
 	},
 	footerCard: {
-		backgroundColor: 'powderblue',
-		height: 70,
-		borderWidth: 1,
-		borderColor: 'black'
+		backgroundColor: colorSpace.cardBG,
+		height: 80,
 	},
 	footerContainer: {
 		flexDirection: 'row',

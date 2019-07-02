@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 export default class Ellipsis extends Component {
@@ -13,6 +13,25 @@ export default class Ellipsis extends Component {
 		) : (this.props.type=='ring') ?
 		(
 			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100, zIndex: -1}}/>
+		) : (this.props.type=='vui') ?
+		(
+			<View
+				style={{
+					flexDirection: 'row',
+					alignItems: 'center',
+					justifyContent: 'space-evenly',	
+				}}
+			>
+				<View
+					style={{
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'space-evenly',	
+					}}
+				>
+					<LottieView source={require('../assets/vui.json')} autoPlay loop style={{height: 600, zIndex: -1, marginBottom: -350}}/>
+				</View>
+			</View>
 		) : (
 			<LottieView source={require('../assets/ring.json')} autoPlay loop style={{height: 100}}/>
 		)

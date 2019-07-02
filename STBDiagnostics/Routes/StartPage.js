@@ -5,32 +5,20 @@
 
 import React, { Component, Fragment} from 'react';
 import {Platform, StyleSheet, Text, View, Image, NativeModules, ScrollView} from 'react-native';
-import { Card, Icon, Button } from 'react-native-elements';
-import Ellipsis from '../Components/Ellipsis';
 import {universalstyles} from '../Components/UniversalStyles';
-import { getDeviceInfo, getPublicIp, getDNSResolver } from '../Functions/getDeviceInfo';
+import SummaryTest from './SummaryTest';
+import MoreInfo from './MoreInfo';
 
 export default class StartPage extends Component {
 	constructor(){
 		super()
-		this.state={
-			ReloadTest: false,
-			MoreInfo: false,
-		}
-	}
-
-	componentDidUpdate(prevProps, prevState){
-		if (prevProps = this.props){
-
-		}
 	}
 
 	render(){
+		const renderPage = (this.props.state.MoreInfo) ? (<MoreInfo state={this.props.state}/>) : (<SummaryTest state={this.props.state} callback={this.props.callback}/>)
 		return(
 			<Fragment>
-				<View style={styles.stbdiagnostic}>
-					<Text>Refactoring Code</Text>
-				</View>
+				{renderPage}
 			</Fragment>
 		)
 	}
