@@ -57,6 +57,10 @@ export default class FooterNavigator extends Component {
 							titleStyle={styles.buttonText}
 							title="Reload"
 							onPress={()=>{this.reload()}}
+							loading={this.props.state.ReloadTest}
+							loadingProps={{color: "#000000"}}
+							disabled={this.props.state.ReloadTest}
+							disabledStyle={{backgroundColor: "#FFFFFF"}}
 						/>
 					</View>
 				</View>

@@ -4,7 +4,7 @@ const colorSpace = {
 	altCardBG: "#FFFFFF",
 	errorCardBG: "#FF7061",
 	warningCardBG: "#F2BB13",
-
+	primary: "#EC008C",
 }
 
 export const universalstyles = {
@@ -79,13 +79,13 @@ export const universalstyles = {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		color: '#EC008C',
+		color: colorSpace.primary,
 	},
 	altCardTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		color: '#EC008C',
+		color: colorSpace.primary,
 	},
 	emptyCard: {
 		opacity: 0,
@@ -120,7 +120,7 @@ export const universalstyles = {
 		maxWidth: 200,
 		minWidth: 120,
 		height: 50,
-		marginHorizontal: 15,
+		marginHorizontal: 25,
 		backgroundColor: '#FFFFFF',
 	},
 	buttonText: {

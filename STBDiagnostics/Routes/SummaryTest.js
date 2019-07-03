@@ -12,16 +12,30 @@ export default class SummaryTest extends Component {
 			show: 0,
 		}
 		this.fade = new Animated.Value(0)
+		this.fade2 = new Animated.Value(0)
 	}
 
 	componentDidMount(){
-		Animated.timing(                  
-			this.fade,            
-			{
-				toValue: 1,                   
-				duration: 1000,              
-			}
-		).start(); 
+		Animated.sequence([
+			Animated.parallel([
+				Animated.timing(                  
+					this.fade,            
+					{
+						toValue: 1,                   
+						duration: 500, 
+						easing: Easing.exp,             
+					}
+				),
+				Animated.timing(                  
+					this.fade2,            
+					{
+						toValue: 1,                   
+						duration: 250, 
+						easing: Easing.exp,             
+					}
+				)
+			])
+		]).start()
 
 		this.setState({
 			...this.state,
@@ -33,7 +47,7 @@ export default class SummaryTest extends Component {
 
 	componentDidUpdate(prevProps){
 		if(prevProps.state.currentSpeed != this.props.state.currentSpeed && this.props.state.ReloadTest){
-			const _increment = ((this.props.state.currentSpeed - prevProps.state.currentSpeed)/20).toFixed(2)
+			const _increment = ((this.props.state.currentSpeed - prevProps.state.currentSpeed)/25).toFixed(2)
 			this.setState({
 				...this.state,
 				increment: _increment,
@@ -43,6 +57,15 @@ export default class SummaryTest extends Component {
 			})
 		}
 		else if(prevProps.state.ReloadTest != this.props.state.ReloadTest && !this.props.state.ReloadTest) {
+			this.fade2 = new Animated.Value(0)
+			Animated.timing(                  
+				this.fade2,            
+				{
+					toValue: 1,                   
+					duration: 250, 
+					easing: Easing.exp,             
+				}
+			).start()
 			this.setState({
 				...this.state,
 				increment: 0,
@@ -75,10 +98,9 @@ export default class SummaryTest extends Component {
 		const PendingTest = (this.props.state.ReloadTest) ? (
 			<Fragment>
 				<Animated.View                 
-				style={{
-						opacity: this.fade, 
-						paddingTop: this.paddingTop       
-					}}
+					style={{
+							opacity: this.fade,     
+						}}
 				>
 					<Ellipsis type="vui"/>
 					<View
@@ -103,42 +125,49 @@ export default class SummaryTest extends Component {
 			</Fragment>
 		) : (
 			<Fragment>
-				<View
-					style={{
-						flex: 1,
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
 					<View
 						style={{
-							flexDirection: 'row',
+							flex: 1,
+							flexDirection: 'column',
 							alignItems: 'center',
-							justifyContent: 'space-evenly',	
+							justifyContent: 'center',
 						}}
 					>
-						<Text style={styles.mbpsTitle}>Average Speed</Text>
+
+						<Animated.View                 
+							style={{
+									opacity: this.fade2,     
+								}}
+						>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-evenly',	
+							}}
+						>
+							<Text style={styles.mbpsTitle}>Average Speed</Text>
+						</View>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-evenly',	
+							}}
+						>
+							<Text style={styles.successTitle}>{this.props.state.averageSpeed.toFixed(2)}</Text>
+						</View>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-evenly',	
+							}}
+						>
+							<Text style={styles.mbpsTitle}>Mbps</Text>
+						</View>
+						</Animated.View>
 					</View>
-					<View
-						style={{
-							flexDirection: 'row',
-							alignItems: 'center',
-							justifyContent: 'space-evenly',	
-						}}
-					>
-						<Text style={styles.successTitle}>{this.props.state.averageSpeed.toFixed(2)}</Text>
-					</View>
-					<View
-						style={{
-							flexDirection: 'row',
-							alignItems: 'center',
-							justifyContent: 'space-evenly',	
-						}}
-					>
-						<Text style={styles.mbpsTitle}>Mbps</Text>
-					</View>
-				</View>
 			</Fragment>
 		)
 

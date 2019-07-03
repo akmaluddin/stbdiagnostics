@@ -11,7 +11,6 @@ import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
 import AppHeader from './Components/Header';
 import StartPage from './Routes/StartPage';
 import FooterNavigator from './Components/FooterNavigator';
-import STBDiagnostic from './Components/STBDiagnostic';
 import { pingTest, deviceInfo, pingIP } from './Functions/TestSequence';
 import { universalstyles } from './Components/UniversalStyles';
 import { NetworkInfo } from 'react-native-network-info';
@@ -38,6 +37,7 @@ export default class App extends Component<Props> {
       speedRuns: [],
       currentSpeed: 0,
       averageSpeed: 0,
+      resolverIP: null,
     }
     this.handleCallbackSetState = this.handleCallbackSetState.bind(this)
   }
